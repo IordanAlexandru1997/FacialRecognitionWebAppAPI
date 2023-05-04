@@ -29,7 +29,10 @@ const db = knex({
 // const corsOptions = {
 //   origin: "https://facialrecognition-mq12.onrender.com/",
 // };
-
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://facialrecognition-mq12.onrender.com'],
+  credentials: true,
+}));
 const app = express();
 
 app.use(bodyParser.json());
