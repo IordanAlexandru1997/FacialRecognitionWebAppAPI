@@ -26,17 +26,18 @@ const db = knex({
 
 
 
-// const corsOptions = {
-//   origin: "https://facialrecognition-mq12.onrender.com/",
-// };
+const corsOptions = {
+  origin: "https://facialrecognitionweb.onrender.com",
+};
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
 
+app.options("/image", cors());
 
-app.get('/about', (req, res) => {
+app.get('/about', cors(), (req, res) => {
   res.send("success");
 })
 
@@ -47,7 +48,7 @@ app.post('/register', (req, res) => register.handleRegister(req, res, bcrypt, db
 //   // Your logic here, for example:
 //   res.send('This is the register page');
 // });
-app.get('/profile/:id', (req, res) => profile.handleProfile(req, res, bcrypt, db))
+app.get('/profile/:id', cors(), (req, res) => profile.handleProfile(req, res, bcrypt, db))
 
 app.put('/image', (req, res) => image.handleImage(req, res, db))
 
