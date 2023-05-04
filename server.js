@@ -51,6 +51,8 @@ app.get('/profile/:id', (req, res) => profile.handleProfile(req, res, bcrypt, db
 
 app.put('/image', (req, res) => image.handleImage(req, res, db))
 
+
+app.options('/imageurl', cors()); // Enable CORS pre-flight for this route
 app.post('/imageurl', (req, res) => image.handleApiCall(req, res))
 
 
