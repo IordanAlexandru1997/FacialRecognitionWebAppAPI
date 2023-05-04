@@ -27,12 +27,7 @@ const db = knex({
 
 
 const corsOptions = {
-  origin: (origin, callback) => {
-    callback(null, true);
-  },
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  allowedHeaders: 'Content-Type,Authorization',
-  optionsSuccessStatus: 200
+  origin: "https://facialrecognition-mq12.onrender.com/",
 };
 
 const app = express();
