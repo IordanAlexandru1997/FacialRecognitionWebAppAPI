@@ -40,6 +40,12 @@ app.use(cors(corsOptions));
 
 
 
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 app.get('/about', (req, res) => {
   res.send("success");
 })
