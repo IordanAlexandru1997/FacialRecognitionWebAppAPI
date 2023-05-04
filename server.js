@@ -26,17 +26,17 @@ const db = knex({
 
 
 
-// const corsOptions = {
-//   origin: '*',
-//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-//   allowedHeaders: 'Content-Type,Authorization',
-//   optionsSuccessStatus: 200
-// };
+const corsOptions = {
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: 'Content-Type,Authorization',
+  optionsSuccessStatus: 200
+};
 
 const app = express();
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 
 
