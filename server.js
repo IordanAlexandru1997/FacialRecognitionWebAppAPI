@@ -27,7 +27,9 @@ const db = knex({
 
 
 const corsOptions = {
-  origin: '*',
+  origin: (origin, callback) => {
+    callback(null, true);
+  },
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: 'Content-Type,Authorization',
   optionsSuccessStatus: 200
@@ -38,13 +40,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 
-
-
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
 
 app.get('/about', (req, res) => {
   res.send("success");
