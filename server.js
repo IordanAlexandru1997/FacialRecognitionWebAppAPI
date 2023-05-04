@@ -26,14 +26,14 @@ const db = knex({
 
 
 
-const corsOptions = {
-  origin: "https://facialrecognition-mq12.onrender.com/",
-};
+// const corsOptions = {
+//   origin: "https://facialrecognition-mq12.onrender.com/",
+// };
 
 const app = express();
 
 app.use(bodyParser.json());
-app.use(cors(corsOptions));
+app.use(cors());
 
 
 app.get('/about', (req, res) => {
