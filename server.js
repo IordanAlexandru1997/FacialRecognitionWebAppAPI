@@ -24,20 +24,14 @@ const db = knex({
 });
 
 
-
-
-const corsOptions = {
-  origin: "https://facialrecognitionweb.onrender.com",
-};
-
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
 
-app.options("/image", cors());
+app.options("/image");
 
-app.get('/about', cors(), (req, res) => {
+app.get('/about', (req, res) => {
   res.send("success");
 })
 
@@ -48,12 +42,12 @@ app.post('/register', (req, res) => register.handleRegister(req, res, bcrypt, db
 //   // Your logic here, for example:
 //   res.send('This is the register page');
 // });
-app.get('/profile/:id', cors(), (req, res) => profile.handleProfile(req, res, bcrypt, db))
+app.get('/profile/:id', (req, res) => profile.handleProfile(req, res, bcrypt, db))
 
 app.put('/image', (req, res) => image.handleImage(req, res, db))
 
 
-app.options('/imageurl', cors()); // Enable CORS pre-flight for this route
+app.options('/imageurl'); // Enable CORS pre-flight for this route
 app.post('/imageurl', (req, res) => image.handleApiCall(req, res))
 
 
