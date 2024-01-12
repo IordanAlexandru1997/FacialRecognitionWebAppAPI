@@ -1,6 +1,5 @@
 const Clarifai = require('clarifai')
 
-const Clarifai = require('clarifai');
 const fetch = require('node-fetch');
 const app = new Clarifai.App({
   apiKey: '4d9db0dce81a452483b5f3a387dc4971'
