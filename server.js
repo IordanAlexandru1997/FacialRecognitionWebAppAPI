@@ -1,3 +1,6 @@
+require('dotenv').config();
+
+
 const express = require('express');
 const req = require('express/lib/request');
 const res = require('express/lib/response');
@@ -15,14 +18,8 @@ const image = require('./controllers/image');
 
 const db = knex({
   client: 'pg',
-  connection: {
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  },
+  connection: process.env.DATABASE_URL,
 });
-
 
 const app = express();
 
@@ -38,10 +35,21 @@ app.get('/about', (req, res) => {
 app.post('/signin', (req, res) => signin.handleSignin(req, res, bcrypt, db))
 
 app.post('/register', (req, res) => register.handleRegister(req, res, bcrypt, db))
-// app.get('/register', (req, res) => {
+// app.get('/register', async(req, res) => {
 //   // Your logic here, for example:
-//   res.send('This is the register page');
+//   try{
+//     const data = await db('login').select('*')
+ 
+//     console.log(data)
+     
+//     res.status(200).json({data})
+//   } catch(error){
+
+//     console.log(error);
+//     res.status(400).json({error});
+//   }
 // });
+
 app.get('/profile/:id', (req, res) => profile.handleProfile(req, res, bcrypt, db))
 
 app.put('/image', (req, res) => image.handleImage(req, res, db))

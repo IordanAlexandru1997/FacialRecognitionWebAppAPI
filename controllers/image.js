@@ -19,7 +19,17 @@ const handleApiCall = async (req, res) => {
     }
 
     const IMAGE_URL = req.body.input;
-    const raw = JSON.stringify({ /* ... Your JSON data ... */ });
+    const raw = JSON.stringify({
+        "inputs": [
+            {
+                "data": {
+                    "image": {
+                        "url": IMAGE_URL
+                    }
+                }
+            }
+        ]
+    });
 
     const requestOptions = {
         method: 'POST',
@@ -40,16 +50,6 @@ const handleApiCall = async (req, res) => {
         });
 };
 
-const handleImage = (req, res, db) => {
-    const { id } = req.body;
-    db('users').where('id', '=', id)
-        .increment('entries', 1)
-        .returning('entries')
-        .then(entries => res.status(200).send(entries[0].entries))
-        .catch(err => res.status(400).json('unable to update entries'));
-};
-
 module.exports = {
-    handleImage,
     handleApiCall
 };
