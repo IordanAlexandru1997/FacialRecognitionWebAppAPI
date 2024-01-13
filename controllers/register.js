@@ -43,8 +43,8 @@ const handleRegister = (req, res, bcrypt, db) => {
   
       // Log error
       console.error('Registration error', err);
-      
-      res.status(400).json('Registration failed');
+      res.
+      res.status(400).json({message: 'Registration failed', error: err.toString()});
   
     });
   
