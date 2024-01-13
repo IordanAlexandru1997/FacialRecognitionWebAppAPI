@@ -13,7 +13,6 @@ const app = new Clarifai.App({
 });
 
 const handleApiCall = async (req, res) => {
-    // Make sure fetch is loaded
     if (!fetch) {
         await new Promise(resolve => setTimeout(resolve, 100)); // Wait for fetch to be imported
     }
@@ -48,8 +47,24 @@ const handleApiCall = async (req, res) => {
             console.log('error', error);
             return res.status(400).json('Unable to work with API');
         });
+
 };
+handleImage = (req, res, db) => {
+
+    const { id } = req.body;
+    db('users').where('id', '=', id)
+      .increment('entries', 1)
+      .returning('entries')
+      .then(entries => res.status(200).json(entries[0].entries))  // Corrected line
+      .catch(err => {     
+          console.error("Database error:", err);
+          res.status(400).json('unable to update entries') 
+      });
+}
+
+
 
 module.exports = {
+    handleImage,
     handleApiCall
 };
