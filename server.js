@@ -34,21 +34,21 @@ app.get('/about', (req, res) => {
 
 app.post('/signin', (req, res) => signin.handleSignin(req, res, bcrypt, db))
 
-app.post('/register', (req, res) => register.handleRegister(req, res, bcrypt, db))
-// app.get('/register', async(req, res) => {
-//   // Your logic here, for example:
-//   try{
-//     const data = await db('login').select('*')
+// app.post('/register', (req, res) => register.handleRegister(req, res, bcrypt, db))
+app.get('/register', async(req, res) => {
+  // Your logic here, for example:
+  try{
+    const data = await db('login').select('*')
  
-//     console.log(data)
+    console.log(data)
      
-//     res.status(200).json({data})
-//   } catch(error){
+    res.status(200).json({data})
+  } catch(error){
 
-//     console.log(error);
-//     res.status(400).json({error});
-//   }
-// });
+    console.log(error);
+    res.status(400).json({error});
+  }
+});
 
 app.get('/profile/:id', (req, res) => profile.handleProfile(req, res, bcrypt, db))
 
