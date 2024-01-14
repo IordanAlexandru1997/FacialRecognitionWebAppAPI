@@ -52,26 +52,23 @@ const handleApiCall = async (req, res) => {
 const handleImage = (req, res, pool) => {
     const { id } = req.body;
 
-    // Query to increment entries and return the new value
     const query = `
         UPDATE users
         SET entries = entries + 1
         WHERE id = $1
-        RETURNING entries;
-    `;
+        RETURNING entries;`;
 
-    pool.query(query, [id], (err, result) => {
-        if (err) {
-            console.error("Database error:", err);
-            res.status(400).json('Unable to update entries');
-        } else {
+        pool.query(query, [id], (err, result) => {
+            if (err) {
+                console.error("Database error:", err);
+                return res.status(400).json('Unable to update entries');
+            }
             if (result.rows.length > 0) {
-                res.status(200).json(result.rows[0].entries);}
-                 else {
-                     res.status(400).json('User not found');
-                    }
-}
-});
+                res.status(200).json(result.rows[0].entries);
+            } else {
+                res.status(400).json('User not found');
+            }
+        });
 };
 
 

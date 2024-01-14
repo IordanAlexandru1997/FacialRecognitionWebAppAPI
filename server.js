@@ -13,7 +13,7 @@ const image = require('./controllers/image');
 
 // PostgreSQL connection pool
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL + (process.env.ENV === "dev" ? "" : "?ssl=true")
+  connectionString: process.env.DATABASE_URL + (process.env.ENV === "prod" ? "" : "?ssl=true")
 });
 
 const app = express();
