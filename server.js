@@ -19,7 +19,12 @@ const image = require('./controllers/image');
 const db = knex({
   client: 'pg',
   connection: process.env.DATABASE_URL + (process.env.ENV === "dev" ? "" : "?ssl=true"),
-  pool: { min: 0, max: 10 } // Set pool min to 0
+  pool: {
+    min: 0,
+    max: 10,
+    acquireTimeoutMillis: 60000, // e.g., 60 seconds
+  },
+  debug: true
 });
 
 const app = express();
