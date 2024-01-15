@@ -1,6 +1,6 @@
 const handleSignin = async (req, res, bcrypt, pool) => {
     const { email, password } = req.body;
-    if (!(email && password) && email != "guest@example.com") {
+    if (!(email && password)) {
         return res.status(400).json('incorrect form of submission');
     }
 
