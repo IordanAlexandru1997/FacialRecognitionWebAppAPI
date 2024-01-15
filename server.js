@@ -10,6 +10,7 @@ const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const image = require('./controllers/image');
 // Add any other controllers you might have
+const ssl = process.env.ENV === "prod" ? { rejectUnauthorized: false } : false;
 
 // PostgreSQL connection pool
 const pool = new Pool({
