@@ -51,9 +51,9 @@ const handleApiCall = async (req, res) => {
 };
 const handleImage = (req, res, pool) => {
     const { id } = req.body;
-    
+
     if (id === 0 || id === 'guest') {
-        return res.json({ entries: 0, message: 'Guest user - entries not updated' });
+        id= '14'
     }
 
     const query = `
